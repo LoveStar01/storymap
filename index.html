@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Map: Impact of Deforestation on Biodiversity in Kenya</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        .section {
+            padding: 20px;
+            margin: 0;
+        }
+        .section:nth-child(odd) {
+            background: #f9f9f9;
+        }
+        .section h2 {
+            color: #2b8cbe;
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .section p {
+            line-height: 1.6;
+        }
+        .section blockquote {
+            margin: 20px 0;
+            padding: 15px;
+            background: #eef;
+            border-left: 5px solid #2b8cbe;
+            font-style: italic;
+            color: #555;
+        }
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            line-height: 1.6;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+        .legend div {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Map Section -->
+    <div id="map"></div>
+
+    <!-- Story Sections -->
+    <div class="section" id="section1">
+        <h2>Introduction: The Threat of Deforestation</h2>
+        <img src="deforestation_intro.jpg" alt="Deforestation in Kenya">
+        <p>Kenya's forests are under threat due to extensive deforestation, driven by agricultural expansion, urbanization, and illegal logging. This map explores the impact of deforestation on biodiversity in key regions across the country.</p>
+        <blockquote>
+            "Deforestation is one of the greatest threats to our biodiversity. We must act now to preserve our forests and the myriad of species that depend on them." — Conservationist, Kenya Wildlife Service
+        </blockquote>
+    </div>
+
+    <div class="section" id="section2">
+        <h2>Case Study: Mau Forest Complex</h2>
+        <img src="mau_forest.jpg" alt="Mau Forest">
+        <p>The Mau Forest Complex, one of Kenya's most vital water catchment areas, has experienced severe deforestation. Over 25% of the forest cover has been lost, affecting local biodiversity and disrupting ecosystems. Endangered species such as the African elephant and the black rhinoceros are increasingly vulnerable due to habitat loss.</p>
+    </div>
+
+    <div class="section" id="section3">
+        <h2>Biodiversity Hotspots Affected by Deforestation</h2>
+        <img src="biodiversity_hotspots.jpg" alt="Biodiversity Hotspots">
+        <p>Biodiversity hotspots like the Aberdare Range, Mount Kenya, and Kakamega Forest are increasingly threatened by habitat loss. These regions are home to rare species, including the Mount Kenya bush viper and the African golden cat. Continued deforestation could lead to the extinction of these species.</p>
+        <p>In the Aberdare Range, forest degradation has led to a sharp decline in native plant species, which has cascading effects on the wildlife that depends on them. Similarly, Mount Kenya, a UNESCO World Heritage Site, faces ecological imbalances due to logging and land conversion.</p>
+    </div>
+
+    <div class="section" id="section4">
+        <h2>Impacts on Indigenous Communities</h2>
+        <img src="indigenous_communities.jpg" alt="Indigenous Communities">
+        <p>Indigenous communities such as the Ogiek and Sengwer rely heavily on forest resources for their livelihoods. The loss of forest cover due to deforestation has severely impacted their traditional way of life, leading to conflicts over land and resources. These communities play a crucial role in forest conservation and biodiversity preservation.</p>
+        <blockquote>
+            "Our ancestors lived in harmony with the forest. Now, we see it disappearing before our eyes, and with it, our culture and traditions." — Ogiek Elder
+        </blockquote>
+    </div>
+
+    <div class="section" id="section5">
+        <h2>Conservation Efforts and Challenges</h2>
+        <img src="conservation_efforts.jpg" alt="Conservation Efforts">
+        <p>While numerous conservation efforts are underway, challenges such as inadequate funding, political interference, and climate change continue to impede progress. Organizations like the Kenya Forest Service and international NGOs are working to restore degraded areas, but more support is needed to make a significant impact.</p>
+        <p>Collaborative initiatives involving government agencies, local communities, and private sector partners are crucial for sustainable forest management. However, enforcement of conservation laws remains a significant hurdle in protecting these critical habitats.</p>
+    </div>
+
+    <div class="section" id="section6">
+        <h2>Call to Action: What Can Be Done?</h2>
+        <img src="call_to_action.jpg" alt="Call to Action">
+        <p>Addressing deforestation and its impact on biodiversity requires a multifaceted approach that includes policy reform, community engagement, and sustainable land use practices. Raising awareness about the importance of forests and advocating for stronger environmental protection laws are essential steps in safeguarding Kenya's natural heritage.</p>
+        <p>Support reforestation projects, promote eco-friendly agricultural practices, and participate in local conservation initiatives. Every action counts in the fight against deforestation and biodiversity loss.</p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-1.2921, 36.8219], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Example data points
+        var deforestationData = [
+            { location: [0.4884, 35.7393], name: "Mau Forest Complex", description: "Severe deforestation in Mau Forest Complex." },
+            { location: [-0.1578, 37.3077], name: "Mount Kenya", description: "Biodiversity loss due to forest degradation in Mount Kenya." },
+            { location: [0.5764, 34.7659], name: "Kakamega Forest", description: "Impact of deforestation on Kakamega Forest." },
+            { location: [0.3817, 36.6028], name: "Aberdare Range", description: "Deforestation threatening biodiversity in the Aberdare Range." }
+        ];
+
+        // Define colors for visualization
+        function getColor(index) {
+            var colors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3'];
+            return colors[index];
+        }
+
+        // Adding points to the map
+        deforestationData.forEach(function(data, index) {
+            L.circleMarker(data.location, {
+                radius: 10,
+                fillColor: getColor(index),
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map)
+            .bindPopup("<b>" + data.name + "</b><br>" + data.description);
+        });
+
+        // Add legend to the map
+        var legend = L.control({ position: 'bottomright' });
+
+        legend.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'legend'),
+                labels = ["Mau Forest Complex", "Mount Kenya", "Kakamega Forest", "Aberdare Range"];
+
+            // Loop through data points and generate a label with a colored square for each
+            for (var i = 0; i < labels.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(i) + '"></i> ' +
+                    labels[i] + '<br>';
+            }
+
+            return div;
+        };
+
+        legend.addTo(map);
+    </script>
+</body>
+</html>
